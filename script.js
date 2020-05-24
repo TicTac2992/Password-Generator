@@ -10,24 +10,21 @@ function writePassword() {
   passwordText.value = password;
 
 }
-//functionality that when the user clicks in box allows them to enter password length
+
 generateBtn.addEventListener("click", writePassword);
 
 var passwordCharLowerCase = ["abcdefghijklmnopqrstuvwxyz"];
 var passwordCharUpperCase = ["ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
-var specialCharacters = ["!@#$%&*+?^"];
+var specialCharacters = ["!@#$%&*+?^()_"];
 var numbers = ["1234567890"];
-var length = "";
+var passwordLength = "";
 var chosenCharacterTypes = [];
 //Reminder - please make sure to use parse int on the numbers above because they are in a string
 
 function generatePassword() {
   event.preventDefault();
   let passwordLength = parseInt(
-    prompt(
-      "How many characters will your password have? Choose between 8 and 128."
-    )
-  );
+    prompt("How many characters will your password have? Choose between 8 and 128."));
 
   console.log("Password length: " + passwordLength);
 
@@ -35,6 +32,7 @@ let confirmUpperCaseLetters = confirm("Do you want to include Upper Case letters
 let confirmLowerCaseLetters = confirm("Do you want to include lower case letters in your password?");
 let confirmNumbers = confirm("Do you want to include numbers in your password?");
 let confirmSpecialCharacters = confirm("Last question...I promise. Do you want to include special characters in your password?");
+
 // Add event listener to generate button
 if (confirmUpperCaseLetters) {
   chosenCharacterTypes.push(passwordCharUpperCase);
@@ -63,17 +61,31 @@ if (confirmSpecialCharacters) {
 } else {
   console.log("Special characters: No");
 }
+}
 
-generateBtn.addEventListener("click", function(event) {
-  event.preventDefault();
-  if user selects lowercase 
+let newPassword = "";
 
-  if user selects UPPER
+//Compose password by randomly assigning values from combination of selected character types
+for (let i = 0; i < passwordLength; i++) {
+  var selectedCharacterIndex = Math.floor(Math.random() * chosenCharacterTypes.length
+  );
 
-  if user selects number
+  var characterString = chosenCharacterTypes[selectedCharacterIndex];
 
-  if user selects special specialCharacters
+  if (typeof characterString === "undefined") {
+    console.log("No character type selected.");
+    wrongCriteriaEntered();
 
+  } else {
+    newPassword +=
+      characterString[Math.floor(Math.random() * characterString.length)];
 
-  else "Error: No Password Generated.  Please select at least one (1) character type!"
+    console.log(newPassword);
+  }
+
+  function wrongCriteriaEntered() {
+    document.getElementById("password").innerHTML =
+      "Oops...looks like you did not select any character type. Please try again and choose at least one.";
+      return wrongCriteriaEntered();
+  }
 }
