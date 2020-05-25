@@ -4,41 +4,30 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-}
+  passwordText.value = password;}
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
+//DOM Interactivity
 var generateBtn = document.querySelector("#generate");
 var generatedPassword = document.querySelector("#password");
 
 //Password type variables
-var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // could also use .toUpperCase() Method on lowercase
 var lowercase = "abcdefghijklmnopqrstuvwxyz";
 var specialCharacters = "!@#$%&*+?^()_";
 var numbers = "1234567890";
 var length = "";
 var chosenCharacterTypes = [];
 
-
 function generatePassword() {
   event.preventDefault();
-  let passwordLength = parseInt(
-    prompt(
-      "How many characters would you like your password to be? Choose between 8 and 128."
-    )
-  );
-
-  console.log("Password length: " + passwordLength); //console.log desired password length
+  let passwordLength = parseInt(prompt("How many characters would you like your password to be? Choose between 8 and 128."));
 
   //If entered input is not valid, display prompt again
   while (isNaN(passwordLength) || passwordLength < 8 || passwordLength > 128) {
-    passwordLength = parseInt(
-      prompt("Please choose a number between 8 and 128.")
-    );
-    console.log("Password length " + passwordLength);
+    passwordLength = parseInt(prompt("Please choose a number between 8 and 128."));
   }
   //Prompt options for password character types
   let confirmUpperCaseLetters = confirm("Do you want uppercase letters in your password?");
@@ -49,30 +38,22 @@ function generatePassword() {
   //Store chosen password types
   if (confirmUpperCaseLetters) {
     chosenCharacterTypes.push(uppercase);
-    console.log("Uppercase: Yes");
   } else {
-    console.log("Uppercase: No");
   }
 
   if (confirmLowerCaseLetters) {
     chosenCharacterTypes.push(lowercase);
-    console.log("Lowercase: Yes");
   } else {
-    console.log("Lowercase: No");
   }
 
   if (confirmNumbers) {
     chosenCharacterTypes.push(numbers);
-    console.log("Numbers: Yes");
   } else {
-    console.log("Numbers: No");
   }
 
   if (confirmSpecialCharacters) {
     chosenCharacterTypes.push(specialCharacters);
-    console.log("Special characters: Yes");
   } else {
-    console.log("Special characters: No");
   }
 
   //this will allow whatever indexes are selected to populate into the "new password" field
@@ -87,14 +68,11 @@ function generatePassword() {
     var characterString = chosenCharacterTypes[selectedCharacterIndex];
 
     if (typeof characterString === "undefined") {
-      console.log("No character type selected.");
       wrongCriteriaEntered();
 
     } else {
       newPassword +=
         characterString[Math.floor(Math.random() * characterString.length)];
-
-      console.log(newPassword);
     }
 
     function wrongCriteriaEntered() {
